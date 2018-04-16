@@ -12,7 +12,7 @@ class App extends React.Component {
                 { id:1, name: "a", artist: "b", album: "c" },
                 { name: "d", artist: "e", album: "f" }
             ],
-            playlistName: 'Tralara',
+            playlistName: '',
             playlistTracks: [
                 {id:1, name: "z", artist: "x", album: "y" },
                 {id:2, name: "r", artist: "s", album: "t" }
@@ -24,9 +24,14 @@ class App extends React.Component {
         this.removeTrack = this.removeTrack.bind(this); //50
         this.updatePlaylistName = this.updatePlaylistName.bind(this); //58
         this.savePlaylist = this.savePlaylist.bind(this); //64
+        this.search = this.search.bind(this); //68
+    }
+    //67 create a method that updates the searchResult from Spotify API
+    search(term){
+        console.log(term);
     }
 
-    //63
+    //63 Track property named "uri" Spotify uses this field to reference tracks in the Spotify library
     savePlaylist(){
         //TODO Generates an array of uri values called trackURIs from the playlistTracks property.In a later step, you will pass the trackURIs array and playlistName to a method that will save the user's playlist to their account.
 
@@ -59,7 +64,7 @@ class App extends React.Component {
              // savedTrack.id !== track.id)){
              // return console.log(track);
          }else{
-             console.log('ID not found, adding...');
+             console.log('ID not found, adding track');
              newTracks.push(track);
              this.setState({ playlistTracks: newTracks });
          }
@@ -72,11 +77,10 @@ class App extends React.Component {
                     Ja<span className="highlight">mmm</span>ing
                 </h1>
                 <div className="App">
-                    <SearchBar />
+                     <SearchBar onSearch={this.search}/> {/*68 */}
                     <div className="App-playlist">
-                        {/* 32 */}
                         <SearchResults
-                            searchResults={this.state.searchResults}
+                            searchResults={this.state.searchResults} //32
                             onAdd={this.addTrack} //42
                         />
                         {/* Pass the tracks to the PlayList.js + <Tracklist */}
