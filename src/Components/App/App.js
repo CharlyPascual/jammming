@@ -23,6 +23,30 @@ class App extends React.Component {
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this); //50
         this.updatePlaylistName = this.updatePlaylistName.bind(this); //58
+        this.savePlaylist = this.savePlaylist.bind(this); //64
+    }
+
+    //63
+    savePlaylist(){
+        //TODO Generates an array of uri values called trackURIs from the playlistTracks property.In a later step, you will pass the trackURIs array and playlistName to a method that will save the user's playlist to their account.
+
+    }
+
+    //57 Updatinig the name of my playlists
+    updatePlaylistName(newName){
+        this.setState({ playlistName: newName });
+        console.log('my new name ',newName);
+        }
+
+    //49
+    removeTrack(track){
+        let newTracks = this.state.playlistTracks.map(track => track);
+        //console.log('newtracks' ,newTracks);
+         if(this.state.playlistTracks.find(savedTrack =>
+             savedTrack.id === track.id)){
+                 newTracks.pop(track); //ojo
+                 this.setState({ playlistTracks: newTracks });
+        }
     }
     // 41  So we want to store the state of playlistTracks temporarily in another variable inside of the addTracks function : let newTracks = this.state.playlistTracks.map(track => track);
     addTrack(track){
@@ -39,21 +63,6 @@ class App extends React.Component {
              newTracks.push(track);
              this.setState({ playlistTracks: newTracks });
          }
-    }
-    //49
-    removeTrack(track){
-        let newTracks = this.state.playlistTracks.map(track => track);
-        //console.log('newtracks' ,newTracks);
-         if(this.state.playlistTracks.find(savedTrack =>
-             savedTrack.id === track.id)){
-                 newTracks.pop(track); //ojo
-                 this.setState({ playlistTracks: newTracks });
-        }
-    }
-    //57 Updatinig the name of my playlists
-    updatePlaylistName(newName){
-        this.setState({ playlistName: newName });
-        console.log('my new name ',newName);
     }
 
     render() {
@@ -76,6 +85,7 @@ class App extends React.Component {
                             onNameChange={this.updatePlaylistName} //58bis
                             playlistTracks={this.state.playlistTracks}
                             onRemove={this.removeTrack}
+                            onSave={this.savePlaylist}
                         />
                     </div>
                 </div>
