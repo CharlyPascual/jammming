@@ -19,22 +19,27 @@ class App extends React.Component {
         };
         //42 ojo
         this.addTrack = this.addTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this);
     }
-    // 41 si el id ya existe no hagas nada
+    // 41  So we want to store the state of playlistTracks temporarily in another variable inside of the addTracks function : let newTracks = this.state.playlistTracks.map(track => track);
     addTrack(track){
+        let newTracks = this.state.playlistTracks.map(track => track);
+        //console.log('newtracks' ,newTracks);
          if(this.state.playlistTracks.find(savedTrack =>
              savedTrack.id === track.id)){
-            return console.log('Yep: ' + track);
+            return ;
              ////Check <a> + </a> from onClick in Track Component
              // savedTrack.id !== track.id)){
              // return console.log(track);
          }else{
-             return console.log('Nop: ' + track);
+             console.log('ID not found, adding...');
+             newTracks.push(track);
+             this.setState({ playlistTracks: newTracks });
          }
     }
 
     removeTrack(track){
-
+        
     }
 
     render() {
@@ -55,6 +60,7 @@ class App extends React.Component {
                         <Playlist
                             playlistName={this.state.playlistName}
                             playlistTracks={this.state.playlistTracks}
+                            onRemove={this.removeTrack}
                         />
                     </div>
                 </div>

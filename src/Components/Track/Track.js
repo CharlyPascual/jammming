@@ -16,6 +16,10 @@ class Track extends React.Component{
         }
     }
 
+    removeTrack(track){
+        // TODO: Create a .removeTrack() method in the Track component. Use it to remove this.props.track from the playlist.
+    }
+
     addTrack(){
          this.props.onAdd(this.props.track);
          console.log('run onClick');
