@@ -9,7 +9,7 @@ class Track extends React.Component{
     renderAction(){ //// TODO: mirar esta funcion
         console.log(this.props.isRemoval);
         if(!this.props.isRemoval){
-            this.props.isRemoval = true;
+            //this.props.isRemoval = true;
             return '+';
         }else {
             return '-';
