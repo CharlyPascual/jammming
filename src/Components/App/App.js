@@ -14,12 +14,13 @@ class App extends React.Component {
             ],
             playlistName: 'Tralara',
             playlistTracks: [
-                {id:1, name: "z", artist: "x", album: "y" }
+                {id:1, name: "z", artist: "x", album: "y" },
+                {id:2, name: "r", artist: "s", album: "t" }
             ]
         };
         //42 ojo
         this.addTrack = this.addTrack.bind(this);
-        this.removeTrack = this.removeTrack.bind(this);
+        this.removeTrack = this.removeTrack.bind(this); //50
     }
     // 41  So we want to store the state of playlistTracks temporarily in another variable inside of the addTracks function : let newTracks = this.state.playlistTracks.map(track => track);
     addTrack(track){
@@ -37,9 +38,15 @@ class App extends React.Component {
              this.setState({ playlistTracks: newTracks });
          }
     }
-
+    //49
     removeTrack(track){
-        
+        let newTracks = this.state.playlistTracks.map(track => track);
+        //console.log('newtracks' ,newTracks);
+         if(this.state.playlistTracks.find(savedTrack =>
+             savedTrack.id === track.id)){
+                 newTracks.pop(track); //ojo
+                 this.setState({ playlistTracks: newTracks });
+        }
     }
 
     render() {

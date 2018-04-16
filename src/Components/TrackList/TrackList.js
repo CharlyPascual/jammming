@@ -11,7 +11,7 @@ class TrackList extends React.Component {
                         key={track.id}
                         track={track}
                         onAdd={this.props.onAdd} //44
-                        isRemoval={this.props.isRemoval} //añadido en 48 dd
+                        isRemoval={this.props.isRemoval} //añadido en 48
                         onRemove={this.props.onRemove} //52
                     />;
                 })}
