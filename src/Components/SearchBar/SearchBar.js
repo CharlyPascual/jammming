@@ -13,7 +13,7 @@ class SearchBar extends React.Component{
     //71
     handleTermChange(e){
         this.setState({term: e.target.value});
-        console.log('to search: ',e.target.value);
+        console.log('search in Spotify: ',e.target.value);
     }
     //69
     search(){
