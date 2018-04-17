@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
+import Spotify from "../../util/Spotify";
 import "./App.css";
 
 class App extends React.Component {
@@ -29,6 +30,7 @@ class App extends React.Component {
     //67 create a method that updates the searchResult from Spotify API
     search(term){
         console.log(term);
+        Spotify.getAccessToken(term);
     }
 
     //63 Track property named "uri" Spotify uses this field to reference tracks in the Spotify library
