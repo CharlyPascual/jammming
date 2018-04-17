@@ -10,13 +10,13 @@ class App extends React.Component {
         super(props);
         this.state = {
             searchResults: [
-                { id:1, name: "a", artist: "b", album: "c" },
-                { name: "d", artist: "e", album: "f" }
+                // { id:1, name: "a", artist: "b", album: "c" },
+                // { name: "d", artist: "e", album: "f" }
             ],
             playlistName: '',
             playlistTracks: [
-                {id:1, name: "z", artist: "x", album: "y" },
-                {id:2, name: "r", artist: "s", album: "t" }
+                // {id:1, name: "z", artist: "x", album: "y" },
+                // {id:2, name: "r", artist: "s", album: "t" }
             ],
 
         };
@@ -28,9 +28,17 @@ class App extends React.Component {
         this.search = this.search.bind(this); //68
     }
     //67 create a method that updates the searchResult from Spotify API
+    //88 Update the state of searchResults with the value resolved from Spotify.search()'s promise.
+
+
     search(term){
         console.log(term);
-        Spotify.getAccessToken(term);
+        Spotify.getAccessToken();
+        console.log('the access token is:v2',Spotify.getAccessToken());
+        //console.log('the access token is:v2 ', accessToken);
+        Spotify.search(term).then(searchResults =>{
+            this.setState({searchResults: searchResults});
+        })
     }
 
     //63 Track property named "uri" Spotify uses this field to reference tracks in the Spotify library

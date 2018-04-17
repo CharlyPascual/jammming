@@ -15,7 +15,7 @@ const Spotify = {
             const accessTokenTmp = window.location.href.match(/access_token=([^&]*)/);
             const expiresInTmp = window.location.href.match(/expires_in=([^&]*)/);
             //Access Token
-            let accessToken = accessTokenTmp[1];
+            accessToken = accessTokenTmp[1];
             //Expires
             let expiresIn = Number(expiresInTmp[1]);
             //Test
@@ -29,8 +29,27 @@ const Spotify = {
             const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirect_uri}`;
             window.location = redirect;
         }
+    },
+    //85,86,87
+    search(term){
+        fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
+            headers: {Authorization: `Bearer ${accessToken}`}
+        }).then((response) => {
+            return response.json();
+        }).then((jsonResponse) => {
+            if (jsonResponse.tracks) {
+                console.log(jsonResponse.tracks);
+                return jsonResponse.tracks.items.map(track =>({
+                    ID: track.id,
+                    Name: track.name,
+                    Artist: track.artists[0].name,
+                    Album: track.album.name,
+                    URI: track.uri
+
+                    })
+                );
+            }
+        })
     }
-};
-//test the module
-//Spotify.getAccessToken();
-export default Spotify
+}
+export default Spotify;
