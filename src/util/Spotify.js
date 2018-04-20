@@ -24,27 +24,31 @@ const Spotify = {
 
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');;
-            return (accessToken, expiresIn);
+            return accessToken;
         } else {
             const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirect_uri}`;
             window.location = redirect;
         }
     },
+
     //85,86,87
     search(term){
-        fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
+        const accessToken = Spotify.getAccessToken();
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
             headers: {Authorization: `Bearer ${accessToken}`}
         }).then((response) => {
             return response.json();
         }).then((jsonResponse) => {
-            if (jsonResponse.tracks) {
+            if (!jsonResponse.tracks) {
+                return [];
+            }else{
                 console.log(jsonResponse.tracks);
                 return jsonResponse.tracks.items.map(track =>({
-                    ID: track.id,
-                    Name: track.name,
-                    Artist: track.artists[0].name,
-                    Album: track.album.name,
-                    URI: track.uri
+                    id: track.id,
+                    name: track.name,
+                    artist: track.artists[0].name,
+                    album: track.album.name,
+                    uri: track.uri
 
                     })
                 );

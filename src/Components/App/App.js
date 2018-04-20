@@ -33,12 +33,13 @@ class App extends React.Component {
 
     search(term){
         console.log(term);
-        Spotify.getAccessToken();
+        // Spotify.getAccessToken();
+        //const accessToken = Spotify.getAccessToken();
         console.log('the access token is:v2',Spotify.getAccessToken());
         //console.log('the access token is:v2 ', accessToken);
         Spotify.search(term).then(searchResults =>{
             this.setState({searchResults: searchResults});
-        })
+        });
     }
 
     //63 Track property named "uri" Spotify uses this field to reference tracks in the Spotify library
